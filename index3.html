@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KelasCrypto - Portofolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: #101e10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+        }
+
+        .clock {
+            color: #fff;
+            font-size: 18px;
+            margin-left: 20px;
+        }
+
+        .navbar .navbar-nav {
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar .navbar-nav .nav-link:hover {
+            color: #a8a8a8;
+        }
+
+        .toggle-menu {
+            display: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            .toggle-menu {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                cursor: pointer;
+            }
+
+            .toggle-menu span {
+                display: block;
+                background-color: #fff;
+                height: 2px;
+                width: 35px;
+            }
+
+            .navbar .navbar-nav {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background: #101e10;
+                transition: max-height 0.3s ease, opacity 0.3s ease;
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+            }
+
+            .navbar .navbar-nav.active {
+                max-height: 300px;
+                opacity: 1;
+            }
+        }
+
+        .portfolio-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 20px;
+            background-color: #f4f4f4;
+            color: #101e10;
+            text-align: center;
+        }
+
+        .portfolio-section h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .portfolio-item {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .portfolio-item h3 {
+            margin-bottom: 10px;
+        }
+
+        .portfolio-item p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .portfolio-item a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #101e10;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .portfolio-item a:hover {
+            background-color: #2a3b2a;
+        }
+
+                /* Modal Styles */
+                .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.4); 
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px; 
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-form label {
+            margin-bottom: 5px;
+        }
+
+        .login-form input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-form button {
+            padding: 10px;
+            background-color: #101e10;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-form button:hover {
+            background-color: #2a3b2a;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar sticky-top">
+        <a href="index.html" class="logo">KELASCRYPTO</a>
+        <div class="clock" id="clock"></div>
+        <div class="toggle-menu" id="toggle-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="navbar-nav" id="navbar-nav">
+            <li><a href="index2.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="index3.html" class="nav-link">Portofolio</a></li>
+            <li><a href="#" class="nav-link" id="login-btn">login</a></li>
+        </ul>
+    </nav>
+
+    <section class="portfolio-section">
+        <h1>Portofolio Kami</h1>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <h3>Proyek A</h3>
+                <p>Deskripsi: Sistem manajemen aset digital yang efisien untuk pengguna.</p>
+                <a href="projek1.html">Lihat Detail</a>
+            </div>
+            <div class="portfolio-item">
+                <h3>Proyek B</h3>
+                <p>Deskripsi: Platform perdagangan cryptocurrency dengan fitur analisis mendalam.</p>
+                <a href="projek2.html">Lihat Detail</a>
+            </div>
+            <div class="portfolio-item">
+                <h3>Proyek C</h3>
+                <p>Deskripsi: Aplikasi wallet cryptocurrency yang aman dan user-friendly.</p>
+                <a href="projek3.html">Lihat Detail</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-login">&times;</span>
+            <form class="login-form">
+                <h2>Login</h2>
+                <label for="login-username">Username:</label>
+                <input type="text" id="login-username" name="username" required>
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="password" required>
+                <button type="submit">Masuk</button>
+            </form>
+        </div>
+    </div> 
+    
+
+    <script>
+        const toggleMenu = document.getElementById('toggle-menu');
+        const navbarNav = document.getElementById('navbar-nav');
+
+        toggleMenu.addEventListener('click', () => {
+            navbarNav.classList.toggle('active');
+        });
+
+        const clock = document.getElementById('clock');
+
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            clock.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Modal Login
+        const loginModal = document.getElementById("login-modal");
+        const loginBtn = document.getElementById("login-btn");
+        const closeLogin = document.getElementById("close-login");
+
+        loginBtn.onclick = function() {
+            loginModal.style.display = "block";
+        }
+
+        closeLogin.onclick = function() {
+            loginModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == loginModal) {
+                loginModal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
